@@ -13,7 +13,7 @@ import session from "express-session";
 import pgSession from "connect-pg-simple";
 import bcrypt from "bcryptjs";
 import pool from "./db/pool.js";
-import userRoutes from "./routes/userRoutes.js";
+import indexRoutes from "./routes/indexRoutes.js";
 
 const app = express();
 
@@ -133,7 +133,7 @@ app.post("/sign-up", async (req, res, next) => {
 });
 
 // custom routers
-app.use("/", userRoutes);
+app.use("/", indexRoutes);
 
 // 404 for no routes found
 app.use((req, res) => {

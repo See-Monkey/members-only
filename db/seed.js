@@ -10,29 +10,57 @@ if (process.env.NODE_ENV !== "production") {
 const { Client } = pkg;
 
 const SQL = `
-DROP TABLE IF EXISTS inventory, categories CASCADE;
+DROP TABLE IF EXISTS messages, users, roles CASCADE;
 
-CREATE TABLE categories (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR (255) UNIQUE NOT NULL
+-- Roles table
+CREATE TABLE roles (
+  id INTEGER PRIMARY KEY,
+  role VARCHAR(50) UNIQUE NOT NULL
 );
 
-CREATE TABLE inventory (
+-- Users table
+CREATE TABLE users (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  item VARCHAR (255) NOT NULL,
-  qty INT NOT NULL CHECK (qty >= 0),
-  price INT NOT NULL CHECK (price >= 0),
-  category_id INT NOT NULL REFERENCES categories(id) ON DELETE CASCADE
+  username VARCHAR(255) UNIQUE NOT NULL,
+  password TEXT NOT NULL,
+  role_id INTEGER NOT NULL REFERENCES roles(id),
+  avatar_url TEXT,
+  firstname VARCHAR(100),
+  lastname VARCHAR(100)
 );
 
-INSERT INTO categories (name) 
-VALUES
-  ('Weapons')
-ON CONFLICT (name) DO NOTHING;
+-- Messages table
+CREATE TABLE messages (
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  message VARCHAR(255) NOT NULL,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-INSERT INTO inventory (item, qty, price, category_id)
+-- Seed roles
+INSERT INTO roles (id, role)
 VALUES
-  ('Iron Sword', 10, 150, 1)
+  (1, 'Viewer'),
+  (2, 'Member'),
+  (3, 'Admin');
+
+-- Seed a test user (password must already be bcrypt-hashed)
+-- Example hash is for password: "password123"
+INSERT INTO users (username, password, role_id, firstname, lastname)
+VALUES (
+  'admin@example.com',
+  '$2a$10$Q9YjZ7gQ5y6s9l8L8k6e0u0B0W8R1z0R2H1Z9F1Qz6q9Zx0cZzH3a',
+  3,
+  'Admin',
+  'User'
+);
+
+-- Seed a message
+INSERT INTO messages (message, user_id)
+VALUES (
+  'Hello world!',
+  1
+);
 `;
 
 async function main() {

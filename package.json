@@ -1,8 +1,8 @@
 {
-	"name": "template-express",
+	"name": "members-only",
 	"version": "1.0.0",
 	"type": "module",
-	"description": "Express EJS PostgreSQL Passport",
+	"description": "The Odin Project - Express - Passport Authentication and Sessions",
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -12,14 +12,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/See-Monkey/template-express.git"
+		"url": "git+https://github.com/See-Monkey/members-only.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/See-Monkey/template-express/issues"
+		"url": "https://github.com/See-Monkey/members-only/issues"
 	},
-	"homepage": "https://github.com/See-Monkey/template-express#readme",
+	"homepage": "https://github.com/See-Monkey/members-only#readme",
 	"dependencies": {
 		"bcryptjs": "^3.0.3",
 		"connect-pg-simple": "^10.0.0",
