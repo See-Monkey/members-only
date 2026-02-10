@@ -1,0 +1,9 @@
+<form method="POST" action="/upgrade">
+	<label for="secret">Upgrade Code</label>
+	<input type="password" name="secret" id="secret" required />
+	<button type="submit">Upgrade</button>
+
+	<% if (typeof error !== "undefined") { %>
+		<p class="error"><%= error %></p>
+	<% } %>
+</form>
