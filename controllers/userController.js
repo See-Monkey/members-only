@@ -12,8 +12,7 @@ async function getIndex(req, res) {
 
 async function register(req, res, next) {
 	try {
-		const { username, password, firstName, lastName, role, avatarURL } =
-			req.body;
+		const { username, password, firstName, lastName, avatarURL } = req.body;
 
 		const user = await userModel.createUser({
 			username,

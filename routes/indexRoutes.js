@@ -1,6 +1,12 @@
 import { Router } from "express";
 import passport from "passport";
 import { isAuth } from "../middleware/auth.js";
+import {
+	validateUser,
+	validateMessage,
+	validateUpgrade,
+	handleValidationErrors,
+} from "../middleware/validators.js";
 
 import userController from "../controllers/userController.js";
 import messageController from "../controllers/messageController.js";
@@ -8,6 +14,7 @@ import messageController from "../controllers/messageController.js";
 const router = Router();
 
 router.get("/", userController.getIndex);
+
 router.post(
 	"/login",
 	passport.authenticate("local", {
@@ -23,12 +30,29 @@ router.post("/logout", (req, res, next) => {
 	});
 });
 
-router.post("/register", userController.register);
+router.post(
+	"/register",
+	validateUser,
+	handleValidationErrors("register"),
+	userController.register,
+);
 
 router.get("/messages", isAuth, messageController.getMessages);
-router.post("/messages", isAuth, messageController.postMessage);
+router.post(
+	"/messages",
+	isAuth,
+	validateMessage,
+	handleValidationErrors("messages"),
+	messageController.postMessage,
+);
 
 router.get("/upgrade", isAuth, userController.getUpgrade);
-router.post("/upgrade", isAuth, userController.postUpgrade);
+router.post(
+	"/upgrade",
+	isAuth,
+	validateUpgrade,
+	handleValidationErrors("upgrade"),
+	userController.postUpgrade,
+);
 
 export default router;
