@@ -7,7 +7,11 @@ const ROLES = {
 };
 
 async function getIndex(req, res) {
-	res.render("index");
+	res.render("index", { errors: [] });
+}
+
+async function getRegister(req, res) {
+	res.render("register", { errors: [], userInput: {} });
 }
 
 async function register(req, res, next) {
@@ -33,7 +37,7 @@ async function register(req, res, next) {
 }
 
 async function getUpgrade(req, res) {
-	res.render("upgrade");
+	res.render("upgrade", { errors: [], error: null });
 }
 
 async function postUpgrade(req, res, next) {
@@ -73,6 +77,7 @@ async function postUpgrade(req, res, next) {
 
 export default {
 	getIndex,
+	getRegister,
 	register,
 	getUpgrade,
 	postUpgrade,

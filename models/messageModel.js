@@ -29,7 +29,13 @@ async function createMessage({ message, user_id }) {
 	return rows[0];
 }
 
+async function deleteMessage(id) {
+	const sql = "DELETE FROM messages WHERE id = $1";
+	await pool.query(sql, [id]);
+}
+
 export default {
 	getAllMessages,
 	createMessage,
+	deleteMessage,
 };

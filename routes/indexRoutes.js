@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-import { isAuth } from "../middleware/auth.js";
+import { isAuth, isAdmin } from "../middleware/auth.js";
 import {
 	validateUser,
 	validateMessage,
@@ -30,6 +30,8 @@ router.post("/logout", (req, res, next) => {
 	});
 });
 
+router.get("/register", userController.getRegister);
+
 router.post(
 	"/register",
 	validateUser,
@@ -54,5 +56,7 @@ router.post(
 	handleValidationErrors("upgrade"),
 	userController.postUpgrade,
 );
+
+router.post("/messages/:id/delete", isAdmin, messageController.deleteMessage);
 
 export default router;

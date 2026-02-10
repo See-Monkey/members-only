@@ -21,7 +21,18 @@ async function postMessage(req, res, next) {
 	}
 }
 
+async function deleteMessage(req, res, next) {
+	try {
+		const messageId = req.params.id;
+		await messageModel.deleteMessage(messageId);
+		res.redirect("/messages");
+	} catch (err) {
+		next(err);
+	}
+}
+
 export default {
 	getMessages,
 	postMessage,
+	deleteMessage,
 };

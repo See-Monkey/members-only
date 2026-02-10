@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Messages</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+
+  <h1>Messages</h1>
+
+  <p>
+    Welcome, <%= user.firstname || user.username %>! 
+    <form action="/logout" method="POST" class="inline-form">
+      <button type="submit">Logout</button>
+    </form>
+  </p>
+
+  <% if (messages && messages.length) { %>
+    <ul class="message-list">
+      <% messages.forEach(msg => { %>
+        <li>
+          <strong><%= msg.username %>:</strong> <%= msg.message %>
+          <small>(<%= new Date(msg.created_at).toLocaleString() %>)</small>
+          <% if (user.role_id === 3) { %>
+            <form action="/messages/<%= msg.id %>/delete" method="POST" class="inline-form">
+              <button type="submit">Delete</button>
+            </form>
+          <% } %>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No messages yet.</p>
+  <% } %>
+
+  <h2>Post a message</h2>
+  <form action="/messages" method="POST">
+    <input type="text" name="message" maxlength="255" required>
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>

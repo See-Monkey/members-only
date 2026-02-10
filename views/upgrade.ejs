@@ -1,9 +1,37 @@
-<form method="POST" action="/upgrade">
-	<label for="secret">Upgrade Code</label>
-	<input type="password" name="secret" id="secret" required />
-	<button type="submit">Upgrade</button>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upgrade Role</title>
+</head>
+<body>
+    <%- include('partials/header') %>
 
-	<% if (typeof error !== "undefined") { %>
-		<p class="error"><%= error %></p>
-	<% } %>
-</form>
+  <h1>Upgrade Your Role</h1>
+
+  <p>Current Role: 
+    <% if (user.role_id === 1) { %>Viewer<% } %>
+    <% if (user.role_id === 2) { %>Member<% } %>
+    <% if (user.role_id === 3) { %>Admin<% } %>
+  </p>
+
+  <% if (errors) { %>
+    <ul class="errors">
+      <% errors.forEach(err => { %>
+        <li><%= err.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <% if (error) { %>
+    <p class="error"><%= error %></p>
+  <% } %>
+
+  <form action="/upgrade" method="POST">
+    <label>Upgrade Code:</label>
+    <input type="text" name="secret" required>
+    <button type="submit">Upgrade</button>
+  </form>
+
+  <p><a href="/messages">Back to Messages</a></p>
+</body>
+</html>

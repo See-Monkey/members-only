@@ -1,9 +1,4 @@
-import { loadEnvFile } from "node:process";
-
-if (process.env.NODE_ENV !== "production") {
-	loadEnvFile();
-}
-
+import "dotenv/config"; // automatically loads .env
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "node:url";
