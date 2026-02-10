@@ -53,7 +53,7 @@ async function postUpgrade(req, res, next) {
 			});
 		}
 
-		// No downgrades or redundant upgrades
+		// no downgrades or redundant upgrades
 		if (targetRole <= currentRole) {
 			return res.status(400).render("upgrade", {
 				error: "You already have this role or higher",
@@ -62,7 +62,7 @@ async function postUpgrade(req, res, next) {
 
 		await userModel.updateUserRole(req.user.id, targetRole);
 
-		// Update session user so they don’t need to log out/in
+		// update session user so they don’t need to log out/in
 		req.user.role_id = targetRole;
 
 		res.redirect("/messages");
