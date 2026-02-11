@@ -17,6 +17,8 @@
         </form>
       </p>
     </div>
+
+    <% if (user.role_id > 1) { %>
     <div class="postContainer">
       <h2>Post a message</h2>
       <form action="/messages" method="POST">
@@ -24,13 +26,21 @@
         <button type="submit">Send</button>
       </form>
     </div>
+    <% } %>
+
     <content>
       <% if (messages && messages.length) { %>
           <% messages.forEach(msg => { %>
             <div class="messageContainer">
               <img src="<%= msg.avatar_url || '/img/default-avatar.svg' %>" alt="Avatar" class="postAvatar"/>
               <div class="messageInfo">
-                <p><strong><%= msg.firstname %> <%= msg.lastname %>:</strong></p>
+
+                <% if (user.role_id > 1) { %>
+                  <p><strong><%= msg.firstname %> <%= msg.lastname %>:</strong></p>
+                <% } else { %>
+                  <p><strong>Anonymous User:</strong></p>
+                <% } %>
+              
                 <p><%= msg.message %></p>
                 <p class="timestamp"><small>(<%= new Date(msg.created_at).toLocaleString() %>)</small></p>
                 <% if (user.role_id === 3) { %>
