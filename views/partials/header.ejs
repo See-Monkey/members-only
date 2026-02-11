@@ -1,28 +1,33 @@
 <head>
+  <link rel="stylesheet" href="/css/reset.css">
 	<link rel="stylesheet" href="/css/header.css" />
 </head>
 <header>
   <h1>Members Only</h1>
 
-  <div class="header-container">
+  <div class="headerContainer">
     <% if (!user) { %>
       <!-- Logged out -->
-      <a href="/">Login</a>
-      <a href="/register">Register</a>
+      <div class="loginLinks">
+        <a href="/">Login</a>
+        <a href="/register">Register</a>
+      </div>
     <% } else { %>
       <!-- Logged in -->
-      <div class="user-info">
-        <img src="<%= user.avatarURL || '/img/default-avatar.svg' %>" alt="Avatar" class="avatar">
-        <span><%= user.firstname %> <%= user.lastname %></span>
+      <div class="userContainer">
+        <img src="<%= user.avatar_url || '/img/default-avatar.svg' %>" alt="Avatar" class="avatar">
+          <div class="userInfo">
+            <span><%= user.firstname %> <%= user.lastname %></span>
+      
+            <% if (user.role_id < 3) { %>
+              <a href="/upgrade">Upgrade</a>
+            <% } %>
+
+            <form action="/logout" method="POST" class="inlineForm">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
       </div>
-
-      <% if (user.role_id < 3) { %>
-        <a href="/upgrade">Upgrade</a>
-      <% } %>
-
-      <form action="/logout" method="POST" class="inline-form">
-        <button type="submit">Logout</button>
-      </form>
     <% } %>
   </div>
 </header>

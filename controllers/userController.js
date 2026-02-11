@@ -69,7 +69,7 @@ async function postUpgrade(req, res, next) {
 		// update session user so they don’t need to log out/in
 		req.user.role_id = targetRole;
 
-		res.redirect("/messages");
+		res.render("upgrade", { errors: [], error: null });
 	} catch (err) {
 		next(err);
 	}
