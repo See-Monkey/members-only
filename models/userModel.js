@@ -40,7 +40,23 @@ async function updateUserRole(userId, roleId) {
 	await pool.query(query, [roleId, userId]);
 }
 
+async function updateUser(id, { firstname, lastname, avatar_url }) {
+	const query = `
+		UPDATE users
+		SET firstname = $1,
+		    lastname = $2,
+		    avatar_url = $3
+		WHERE id = $4
+		RETURNING *
+	`;
+
+	const values = [firstname, lastname, avatar_url, id];
+	const { rows } = await pool.query(query, values);
+	return rows[0];
+}
+
 export default {
 	createUser,
 	updateUserRole,
+	updateUser,
 };

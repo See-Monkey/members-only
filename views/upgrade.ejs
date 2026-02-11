@@ -6,33 +6,39 @@
 </head>
 <body>
     <%- include('partials/header') %>
+    <a href="/messages" class="backLink">Back to Message Board</a>
 
-  <h1>Upgrade Your Role</h1>
+  <main>
+    <div class="container">
+      <h1>Upgrade Your Role</h1>
+      <p>Current Role:
+        <% if (user.role_id === 1) { %>Viewer<% } %>
+        <% if (user.role_id === 2) { %>Member<% } %>
+        <% if (user.role_id === 3) { %>Admin<% } %>
+      </p>
+      <% if (errors) { %>
+        <ul class="errors">
+          <% errors.forEach(err => { %>
+            <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+      <% if (error) { %>
+        <p class="error"><%= error %></p>
+      <% } %>
+      <form action="/upgrade" method="POST" id="upgradeForm">
+        <label>Upgrade Code:</label>
+        <input type="text" name="secret" required>
+        <button type="submit">Upgrade</button>
+      </form>
 
-  <p>Current Role: 
-    <% if (user.role_id === 1) { %>Viewer<% } %>
-    <% if (user.role_id === 2) { %>Member<% } %>
-    <% if (user.role_id === 3) { %>Admin<% } %>
-  </p>
+      <% if (user.role_id === 1) { %>
+      <p>Currently you cannot post in messages or see who previous posts belong to.</p>
+      <p>For the purposes of trying the app, use the secret password member123 to upgrade your membership.</p>
+      <% } %>
 
-  <% if (errors) { %>
-    <ul class="errors">
-      <% errors.forEach(err => { %>
-        <li><%= err.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
-
-  <% if (error) { %>
-    <p class="error"><%= error %></p>
-  <% } %>
-
-  <form action="/upgrade" method="POST">
-    <label>Upgrade Code:</label>
-    <input type="text" name="secret" required>
-    <button type="submit">Upgrade</button>
-  </form>
-
-  <p><a href="/messages">Back to Messages</a></p>
+      <p><a href="/messages">Back to Message Board</a></p>
+    </div>
+  </main>
 </body>
 </html>

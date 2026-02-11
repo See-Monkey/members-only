@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Account</title>
+  <link rel="stylesheet" href="/css/account.css" />
+</head>
+<body>
+    <%- include('partials/header') %>
+    <a href="/messages" class="backLink">Back to Message Board</a>
+
+  <main>
+      <div class="container">
+          <h1>My Account</h1>
+          <% if (errors) { %>
+            <ul class="errors">
+              <% errors.forEach(err => { %>
+                <li><%= err.msg %></li>
+              <% }) %>
+            </ul>
+          <% } %>
+          <img src="<%= user.avatar_url || '/img/default-avatar.svg' %>" alt="Avatar" class="accountAvatar"/>
+          <form action="/account" method="POST" id="accountForm">
+            <label>Email:
+                <input type="text" name="username" value="<%= user.username || '' %>" required disabled>
+            </label>
+            <label>First Name:
+                <input type="text" name="firstName" value="<%= user.firstname || '' %>" required>
+            </label>
+            <label>Last Name:
+                <input type="text" name="lastName" value="<%= user.lastname || '' %>" required>
+            </label>
+            <label>Avatar URL (optional):
+                <input type="text" name="avatarURL" value="<%= user.avatar_url || '' %>">
+            </label>
+            <button type="submit">Update</button>
+          </form>
+      </div>
+  </main>
+</body>
+</html>

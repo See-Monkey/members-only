@@ -5,6 +5,7 @@ import {
 	validateUser,
 	validateMessage,
 	validateUpgrade,
+	validateUserUpdate,
 	handleValidationErrors,
 } from "../middleware/validators.js";
 
@@ -55,6 +56,15 @@ router.post(
 	validateUpgrade,
 	handleValidationErrors("upgrade"),
 	userController.postUpgrade,
+);
+
+router.get("/account", isAuth, userController.getAccount);
+router.post(
+	"/account",
+	isAuth,
+	validateUserUpdate,
+	handleValidationErrors("account"),
+	userController.postUserUpdate,
 );
 
 router.post("/messages/:id/delete", isAdmin, messageController.deleteMessage);

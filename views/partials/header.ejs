@@ -15,10 +15,11 @@
     <% } else { %>
       <!-- Logged in -->
       <div class="userContainer">
-        <img src="<%= user.avatar_url || '/img/default-avatar.svg' %>" alt="Avatar" class="avatar">
-          <div class="userInfo">
+        <a href="/account">
+        <img src="<%= user.avatar_url || '/img/default-avatar.svg' %>" alt="Avatar" class="avatar"> 
+        <div class="userInfo">
             <span><%= user.firstname %> <%= user.lastname %></span>
-      
+            </a> 
             <% if (user.role_id < 3) { %>
               <a href="/upgrade">Upgrade</a>
             <% } %>

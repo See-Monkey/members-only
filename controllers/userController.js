@@ -7,6 +7,10 @@ const ROLES = {
 };
 
 async function getIndex(req, res) {
+	if (req.user) {
+		return res.redirect("/messages");
+	}
+
 	res.render("index", { errors: [] });
 }
 
@@ -75,10 +79,40 @@ async function postUpgrade(req, res, next) {
 	}
 }
 
+async function getAccount(req, res) {
+	res.render("account", {
+		user: req.user,
+		errors: [],
+	});
+}
+
+async function postUserUpdate(req, res, next) {
+	try {
+		const { firstName, lastName, avatarURL } = req.body;
+
+		const updatedUser = await userModel.updateUser(req.user.id, {
+			firstname: firstName,
+			lastname: lastName,
+			avatar_url: avatarURL ? avatarURL : req.user.avatar_url,
+		});
+
+		// Update session user immediately
+		req.user.firstname = updatedUser.firstname;
+		req.user.lastname = updatedUser.lastname;
+		req.user.avatar_url = updatedUser.avatar_url;
+
+		res.redirect("/messages");
+	} catch (err) {
+		next(err);
+	}
+}
+
 export default {
 	getIndex,
 	getRegister,
 	register,
 	getUpgrade,
 	postUpgrade,
+	getAccount,
+	postUserUpdate,
 };

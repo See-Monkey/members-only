@@ -11,6 +11,10 @@ main {
 	align-items: center;
 }
 
+.backLink {
+	padding: 20px;
+}
+
 .container {
 	background-color: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(10px);
@@ -26,7 +30,12 @@ main {
 	max-width: 505px;
 }
 
-#registerForm {
+.accountAvatar {
+	max-height: 250px;
+	max-width: 250px;
+}
+
+#accountForm {
 	display: flex;
 	flex-direction: column;
 	gap: 14px;
@@ -34,6 +43,6 @@ main {
 	padding: 20px 0 30px;
 }
 
-#registerForm label {
+#accountForm label {
 	align-self: flex-end;
 }

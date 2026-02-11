@@ -39,6 +39,18 @@ export const validateUpgrade = [
 	body("secret").trim().notEmpty().withMessage("Upgrade code is required"),
 ];
 
+export const validateUserUpdate = [
+	body("firstName").trim().notEmpty().withMessage("First name is required"),
+
+	body("lastName").trim().notEmpty().withMessage("Last name is required"),
+
+	body("avatarURL")
+		.optional({ values: "falsy" })
+		.trim()
+		.isURL()
+		.withMessage("Avatar must be a valid URL"),
+];
+
 export function handleValidationErrors(view) {
 	return (req, res, next) => {
 		const errors = validationResult(req);

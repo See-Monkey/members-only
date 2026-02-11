@@ -7,44 +7,39 @@
 <body>
     <%- include('partials/header') %>
 
-  <h1>Register</h1>
-
-  <% if (errors) { %>
-    <ul class="errors">
-      <% errors.forEach(err => { %>
-        <li><%= err.msg %></li>
-      <% }) %>
-    </ul>
-  <% } %>
-
-  <form action="/register" method="POST">
-    <label>Email:</label>
-    <input type="text" name="username" value="<%= userInput?.username || '' %>" required>
-    <br>
-
-    <label>Password:</label>
-    <input type="password" name="password" required>
-    <br>
-
-    <label>Verify Password:</label>
-    <input type="password" name="verifyPassword" required>
-    <br>
-
-    <label>First Name:</label>
-    <input type="text" name="firstName" value="<%= userInput?.firstName || '' %>" required>
-    <br>
-
-    <label>Last Name:</label>
-    <input type="text" name="lastName" value="<%= userInput?.lastName || '' %>" required>
-    <br>
-
-    <label>Avatar URL (optional):</label>
-    <input type="text" name="avatarURL" value="<%= userInput?.avatarURL || '' %>">
-    <br>
-
-    <button type="submit">Register</button>
-  </form>
-
-  <p>Already have an account? <a href="/">Login here</a></p>
+  <main>
+    <div class="container">
+      <h1>Register</h1>
+      <% if (errors) { %>
+        <ul class="errors">
+          <% errors.forEach(err => { %>
+            <li><%= err.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+      <form action="/register" method="POST" id="registerForm">
+        <label>Email:
+          <input type="text" name="username" value="<%= userInput?.username || '' %>" required>
+        </label>
+        <label>Password:
+          <input type="password" name="password" required>
+        </label>
+        <label>Verify Password:
+          <input type="password" name="verifyPassword" required>
+        </label>
+        <label>First Name:
+          <input type="text" name="firstName" value="<%= userInput?.firstName || '' %>" required>
+        </label>
+        <label>Last Name:
+          <input type="text" name="lastName" value="<%= userInput?.lastName || '' %>" required>
+        </label>
+        <label>Avatar URL (optional):
+          <input type="text" name="avatarURL" value="<%= userInput?.avatarURL || '' %>">
+        </label>
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="/">Login here</a></p>
+    </div>
+  </main>
 </body>
 </html>
