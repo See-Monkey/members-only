@@ -8,6 +8,4 @@ const pool = new Pool({
 			: false,
 });
 
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
-
 export default pool;

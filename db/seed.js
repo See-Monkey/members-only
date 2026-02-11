@@ -46,13 +46,14 @@ VALUES
 
 -- Seed a test user (password must already be bcrypt-hashed)
 -- Example hash is for password: "password123"
-INSERT INTO users (username, password, role_id, firstname, lastname)
+INSERT INTO users (username, password, role_id, firstname, lastname, avatar_url)
 VALUES (
-  'admin@example.com',
+  'see-monkey@noreply.com',
   '$2a$10$Q9YjZ7gQ5y6s9l8L8k6e0u0B0W8R1z0R2H1Z9F1Qz6q9Zx0cZzH3a',
   3,
-  'Admin',
-  'User'
+  'See',
+  'Monkey',
+  'https://cdn-icons-png.flaticon.com/512/10722/10722687.png'
 );
 
 -- Seed a message
