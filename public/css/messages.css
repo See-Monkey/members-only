@@ -1,0 +1,58 @@
+main {
+	display: flex;
+	flex-direction: column;
+	padding: 30px;
+	gap: 30px;
+	align-items: center;
+}
+
+.contentHeader {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-self: flex-start;
+}
+
+.postContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: center;
+}
+
+content {
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px 0 70px;
+}
+
+.messageContainer {
+	display: flex;
+	gap: 20px;
+	padding: 20px 10px;
+	border: 1px solid black;
+}
+
+.postAvatar {
+	width: 80px;
+	height: 80px;
+	border: 1px solid black;
+	background-color: white;
+}
+
+.messageInfo {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.timestamp {
+	align-self: flex-end;
+}
+
+#deleteForm {
+	align-self: flex-end;
+}

@@ -8,6 +8,8 @@ async function getAllMessages() {
       messages.created_at,
       users.id AS user_id,
       users.username,
+      users.firstname,
+      users.lastname,
       users.avatar_url
     FROM messages
     INNER JOIN users
